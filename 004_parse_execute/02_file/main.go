@@ -12,6 +12,14 @@ func main() {
 		log.Fatalln(err)
 	}
 
+	tpl.Execute(os.Stdout, nil) // method 1: display in terminal
+	{
+		nf, _ := os.Create("ywa.html")
+		tpl.Execute(nf, nil)
+		nf.Close()
+
+	}
+
 	nf, err := os.Create("index.html")
 	if err != nil {
 		log.Fatalln("error creating file", err)
