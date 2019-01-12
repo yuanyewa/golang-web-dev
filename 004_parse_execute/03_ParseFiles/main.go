@@ -7,6 +7,9 @@ import (
 )
 
 func main() {
+	// if parse only one file, execute is sufficient
+	// if parse two files, execute will only do the first one
+	// executeTemplate will execute a specific one
 	tpl, err := template.ParseFiles("one.gmao")
 	if err != nil {
 		log.Fatalln(err)
@@ -37,7 +40,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	err = tpl.Execute(os.Stdout, nil)
+	err = tpl.ExecuteTemplate(os.Stdout, "two.gmao", nil)
 	if err != nil {
 		log.Fatalln(err)
 	}
