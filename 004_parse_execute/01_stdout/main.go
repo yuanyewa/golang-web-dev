@@ -7,14 +7,19 @@ import (
 )
 
 func main() {
-	tpl, err := template.ParseFiles("tpl.gohtml")
+	tpl, err := template.ParseFiles("tpl.gohtml", "ywa.html")
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	err = tpl.Execute(os.Stdout, nil)
+	err = tpl.ExecuteTemplate(os.Stdout, "tpl.gohtml", nil)
 	if err != nil {
 		log.Fatalln(err)
+	}
+
+	{
+		tpl := template.Must(template.ParseFiles("ywa.html"))
+		tpl.Execute(os.Stdout, nil)
 	}
 }
 
